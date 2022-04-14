@@ -1,2 +1,2 @@
 # gsearch-site
-here is a game search site
+here will be a game search site
