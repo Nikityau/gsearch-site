@@ -1,6 +1,6 @@
 import {Sequelize} from "sequelize";
 
-import {GameModel} from './models/game/game.js'
+import {GameModel} from './models/game/game.model.js'
 
 import {Logger} from "../logger/logger.js";
 
@@ -13,8 +13,12 @@ export async function connectDb() {
 
         await GameModel.defineGameModel(sequelize)
 
-        await sequelize.sync()
+        //await seqSync({ force: false })
     } catch (e) {
         Logger.error(`DB error: ${e.message}`)
     }
+}
+
+export async function seqSync({ params }) {
+    await sequelize.sync({ ...params })
 }

@@ -10,28 +10,19 @@ export class GameModel {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
-                allowNull: false,
-                defaultValue: DataTypes.UUIDV4
+                defaultValue: DataTypes.UUIDV4,
             },
             title: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true,
+            },
+            subtitle: {
+                type: DataTypes.STRING,
+                allowNull: true
             },
             description: {
-                type: DataTypes.TEXT,
-                allowNull: true
-            },
-            rating: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                defaultValue: 0
-            },
-            release_date: {
-                type: DataTypes.DATE,
-                allowNull: true
+                type: DataTypes.TEXT
             }
-
         }, {
             tableName: 'Games'
         })
