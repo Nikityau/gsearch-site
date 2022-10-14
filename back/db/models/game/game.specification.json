@@ -1,0 +1,93 @@
+{
+  "id": "uuid",
+  "title": "string",
+  "subtitle": "string",
+  "slug": "string",
+  "description": "string",
+  "preview_image": "url",
+  "images": [
+    {
+      "id": "uuid",
+      "url": "url"
+    }
+  ],
+  "videos": [
+    {
+      "id": "uuid",
+      "url": "url"
+    }
+  ],
+  "ratings": [
+    {
+      "id": "uuid",
+      "site": "string",
+      "site_icon": "url",
+      "users_rating": "number",
+      "critics_rating": "number"
+    }
+  ],
+  "genres": [
+    {
+      "id": "uuid",
+      "title": "string",
+      "icon": "url"
+    }
+  ],
+  "platforms": [
+    {
+      "id": "uuid",
+      "title": "string",
+      "version": "string",
+      "icon": "url"
+    }
+  ],
+  "downloads": "number",
+  "system_requirements": {
+    "minimal": "string",
+    "recommended": "string"
+  },
+  "facts": [
+    "string"
+  ],
+  "dlc": [
+    {
+      "id": "string",
+      "title": "string",
+      "description": "string",
+      "image_preview": "url",
+      "release_date": "date"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "string",
+      "review_date": "string",
+      "reviewer_nick": "string",
+      "reviewer_icon": "string",
+      "like": "number",
+      "dislike": "number",
+      "answers": [
+        {
+          "id": "string",
+          "review_date": "string",
+          "reviewer_nick": "string",
+          "reviewer_icon": "string",
+          "to_whom_id": "string"
+        }
+      ]
+    }
+  ],
+  "release_date": "date",
+  "developers": [
+    {
+      "id": "uuid",
+      "title": "sting"
+    }
+  ],
+  "publishers": [
+    {
+      "id": "uuid",
+      "title": "string"
+    }
+  ]
+}
