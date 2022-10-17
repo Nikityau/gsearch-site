@@ -5,6 +5,7 @@ import {ImageModel} from "./models/image/image.model.js";
 import {VideoModel} from "./models/video/video.model.js";
 import {AchievementModel} from "./models/game/achievement/achievement.model.js";
 import {DeveloperModel} from "./models/game/developer/developer.model.js";
+import {FactModel} from "./models/game/fact/fact.model.js";
 
 import {Logger} from "../logger/logger.js";
 
@@ -17,7 +18,7 @@ export async function connectDb() {
 
         await defineGameModels()
 
-        await seqSync({force: true, alter: true})
+       /* await seqSync({force: true, alter: true})
 
         const game = await GameModel.create({
             title: 'Metro 2033',
@@ -33,20 +34,22 @@ export async function connectDb() {
             aim: "Kill first enemy",
             game_id: game.id
         })
+        await FactModel.create({ fact: "born", game_id: game.id })
+        await FactModel.create({ fact: "test", game_id: game.id })
 
         await DeveloperModel.create({
             title: '2k',
             icon: 'https://icon.png',
             game_id: game.id,
-        })
+        })*/
 
 
         //const devs = await DeveloperModel.getAll()
         //console.log(devs)
 
-        const all = await GameModel.getAll()
+       /* const all = await GameModel.getAll()
 
-        console.log(all)
+        console.log(all)*/
 
     } catch (e) {
         Logger.error(`DB error: ${e.message}`)
@@ -59,9 +62,11 @@ async function defineGameModels() {
     await VideoModel.defineModel(sequelize)
     await AchievementModel.defineModel(sequelize)
     await DeveloperModel.defineModel(sequelize)
+    await FactModel.defineModel(sequelize)
 
     await GameModel.modelHasMany(ImageModel._imageModel, {foreignKey: 'game_id', asWhat: 'images'})
     await GameModel.modelHasMany(VideoModel._videoModel, {foreignKey: 'game_id', asWhat: 'videos'})
+    await GameModel.modelHasMany(FactModel._factModel, { foreignKey: 'game_id', asWhat: 'game_facts' })
     await GameModel.modelHasMany(AchievementModel._achievementModel, {foreignKey: 'game_id', asWhat: 'achievements'})
 
     await GameModel.belongsToMany(DeveloperModel._devModel, {

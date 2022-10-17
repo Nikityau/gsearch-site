@@ -1,6 +1,10 @@
 import {Model, DataTypes} from 'sequelize'
 
-import { DeveloperModel } from "./developer/developer.model.js";
+import {DeveloperModel} from "./developer/developer.model.js";
+import {ImageModel} from "../image/image.model.js";
+import {VideoModel} from "../video/video.model.js";
+import {AchievementModel} from "./achievement/achievement.model.js";
+import {FactModel} from "./fact/fact.model.js";
 
 import {Logger} from "../../../logger/logger.js";
 
@@ -61,10 +65,11 @@ export class GameModel {
         })
     }
 
-    static async modelHasMany(model, { foreignKey, asWhat }) {
-        GameModel._gameModel.hasMany(model, {  foreignKey:foreignKey ,as: asWhat })
+    static async modelHasMany(model, {foreignKey, asWhat}) {
+        GameModel._gameModel.hasMany(model, {foreignKey: foreignKey, as: asWhat})
     }
-    static async belongsToMany(model, { foreignKey, asWhat, through }) {
+
+    static async belongsToMany(model, {foreignKey, asWhat, through}) {
         GameModel._gameModel.belongsToMany(model, {
             foreignKey: foreignKey,
             as: asWhat,
@@ -88,9 +93,26 @@ export class GameModel {
         try {
             const all = await GameModel._gameModel.findAll({
                 include: [
-                    "images",
-                    "videos",
-                    "achievements",
+                    {
+                        model: ImageModel._imageModel,
+                        attributes: ['id', 'url'],
+                        as: 'images',
+                    },
+                    {
+                        model: VideoModel._videoModel,
+                        attributes: ['id', 'url'],
+                        as: 'videos',
+                    },
+                    {
+                        model: AchievementModel._achievementModel,
+                        attributes: ['id', 'title', 'icon', 'aim'],
+                        as: 'achievements',
+                    },
+                    {
+                        model: FactModel._factModel,
+                        attributes: ['id', 'fact'],
+                        as: 'game_facts'
+                    },
                     {
                         model: DeveloperModel._devModel,
                         as: 'developers',
