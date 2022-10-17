@@ -8,27 +8,32 @@
   "images": [
     {
       "id": "uuid",
+      "game_id": "uuid",
       "url": "url"
     }
   ],
   "videos": [
     {
       "id": "uuid",
+      "game_id": "uuid",
       "url": "url"
     }
   ],
   "ratings": [
     {
       "id": "uuid",
+      "original_game_id": "uuid",
       "site": "string",
       "site_icon": "url",
       "users_rating": "number",
-      "critics_rating": "number"
+      "critics_rating": "number",
+      "critic_url": "url"
     }
   ],
   "genres": [
     {
       "id": "uuid",
+      "original_game_id": "uuid",
       "title": "string",
       "icon": "url"
     }
@@ -36,22 +41,84 @@
   "platforms": [
     {
       "id": "uuid",
+      "original_game_id": "uuid",
       "title": "string",
       "version": "string",
       "icon": "url"
     }
   ],
+  "age_rating": {
+    "id": "uuid",
+    "rating_usa": "string",
+    "rating_rars": "string"
+  },
+  "achievements": [
+    {
+      "id": "uuid",
+      "original_game_id": "uuid",
+      "achieve_title": "string",
+      "achieve_icon": "url",
+      "achieve_aim": "string"
+    }
+  ],
   "downloads": "number",
   "system_requirements": {
-    "minimal": "string",
-    "recommended": "string"
+    "minimal": {
+      "spec_requirements": "string",
+      "oc": "string",
+      "processor": "string",
+      "ram": "string",
+      "graphic_card": "string",
+      "network": "string",
+      "hard_size": "string",
+      "addition": "string"
+    },
+    "recommended": {
+      "spec_requirements": "string",
+      "oc": "string",
+      "processor": "string",
+      "ram": "string",
+      "graphic_card": "string",
+      "network": "string",
+      "hard_size": "string",
+      "addition": "string"
+    }
   },
-  "facts": [
-    "string"
+  "game_tags": [
+    {
+      "id": "uuid",
+      "tag_title": "string"
+    }
   ],
+  "info_tags": [
+    {
+      "id": "uuid",
+      "tag_icon": "url",
+      "tag_title": "string"
+    }
+  ],
+  "languages": [
+    {
+      "id": "uuid",
+      "lang": "lang",
+      "lang_interface": "bool",
+      "lang_subs": "bool",
+      "lang_sound": "bool"
+    }
+  ],
+  "facts": [
+    {
+      "id": "uuid",
+      "fact": "text"
+    }
+  ],
+  "is_dlc": "bool",
+  "original_game_id": "uuid | null",
   "dlc": [
     {
-      "id": "string",
+      "id": "uuid",
+      "original_game_id": "uuid | null",
+      "is_dlc": "bool",
       "title": "string",
       "description": "string",
       "image_preview": "url",
@@ -81,13 +148,15 @@
   "developers": [
     {
       "id": "uuid",
-      "title": "sting"
+      "title": "sting",
+      "icon": "url"
     }
   ],
   "publishers": [
     {
       "id": "uuid",
-      "title": "string"
+      "title": "string",
+      "icon": "url"
     }
   ]
 }
