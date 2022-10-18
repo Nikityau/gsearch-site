@@ -41,12 +41,12 @@ export class DeveloperModel {
     }
 
     static async getAll() {
-        const dev = await DeveloperModel._devModel.findAll({
+        const all = await DeveloperModel._devModel.findAll({
             include: [
                 'games',
             ]
         })
 
-        return JSON.stringify(dev, null, 2)
+        return all
     }
 }

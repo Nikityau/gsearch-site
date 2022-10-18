@@ -1,10 +1,12 @@
 import {Model, DataTypes} from 'sequelize'
 
 import {DeveloperModel} from "./developer/developer.model.js";
+import {PublisherModel} from "./publisher/publisher.model.js";
 import {ImageModel} from "../image/image.model.js";
 import {VideoModel} from "../video/video.model.js";
 import {AchievementModel} from "./achievement/achievement.model.js";
 import {FactModel} from "./fact/fact.model.js";
+import {GenreModel} from "./genre/genre.model.js";
 
 import {Logger} from "../../../logger/logger.js";
 
@@ -115,16 +117,33 @@ export class GameModel {
                     },
                     {
                         model: DeveloperModel._devModel,
+                        attributes: ['id', 'title', 'icon'],
                         as: 'developers',
                         through: {
                             attributes: ['game_id', 'developer_id']
+                        }
+                    },
+                    {
+                      model: PublisherModel._pubModel,
+                      attributes: ['id', 'title', 'icon'],
+                      as: 'publishers',
+                      through: {
+                          attributes: ['game_id', 'publisher_id']
+                      }
+                    },
+                    {
+                        model: GenreModel._genreModel,
+                        attributes: ['id', 'genre', 'icon'],
+                        as: 'genres',
+                        through: {
+                            attributes: ['genre_id', 'game_id']
                         }
                     }
                 ]
             });
             Logger.success(`DB query: fetch all games`)
 
-            return JSON.stringify(all, null, 2)
+            return all
         } catch (e) {
             Logger.error(`DB query error: ${e.message}`)
         }
