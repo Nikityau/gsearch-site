@@ -1,30 +1,29 @@
-import {DataTypes} from "sequelize";
+import { DataTypes } from "sequelize";
 
-export class AchievementModel {
+export class Info_tagModel {
     static _model = null
     static _modelConfigs = {
-        modelName: 'Achievement',
+        modelName: 'InfoTag',
         model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4
             },
-            title: {
+            tag_title: {
                 type: DataTypes.STRING,
+                unique: true,
                 allowNull: false
             },
-            icon: {
+            tag_icon: {
                 type: DataTypes.STRING,
-                allowNull: false,
-            },
-            aim: {
-                type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true,
+                defaultValue: null
             }
         },
         configs: {
-            tableName: 'Achievements'
-        }
+            tableName: 'InfoTags'
+        },
+        include: []
     }
 }

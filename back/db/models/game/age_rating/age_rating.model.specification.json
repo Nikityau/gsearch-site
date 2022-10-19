@@ -1,0 +1,5 @@
+{
+  "id": "uuid",
+  "rating_usa": "string",
+  "rating_rars": "string"
+}

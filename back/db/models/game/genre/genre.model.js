@@ -1,10 +1,10 @@
 import {DataTypes} from "sequelize";
 
 export class GenreModel {
-    static _genreModel = null
-
-    static async define(sequelize) {
-        GenreModel._genreModel = sequelize.define('Genre', {
+    static _model = null
+    static _modelConfigs = {
+        modelName: 'Genre',
+        model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
@@ -19,24 +19,10 @@ export class GenreModel {
                 allowNull: true,
                 defaultValue: null
             }
-        }, {
+        },
+        configs: {
             tableName: 'Genres'
-        })
-    }
-
-    static async create(obj) {
-        const genre = await GenreModel._genreModel.create(obj)
-
-        await genre.save()
-
-        return genre
-    }
-
-    static async belongsToMany(model, { foreignKey, asWhat, through }) {
-        GenreModel._genreModel.belongsToMany(model, {
-            foreignKey: foreignKey,
-            as: asWhat,
-            through: through
-        })
+        },
+        include: []
     }
 }

@@ -1,0 +1,8 @@
+{
+  "id": "uuid",
+  "site": "string",
+  "site_icon": "url",
+  "users_rating": "number",
+  "critic_rating": "number",
+  "critic_url": "url"
+}

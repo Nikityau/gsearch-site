@@ -1,13 +1,13 @@
 import { DataTypes } from "sequelize";
 
-import {GameModel} from "../game.model.js";
-import {GenreModel} from "../genre/genre.model.js";
+import {GameModel} from "../../game.model.js";
+import {GenreModel} from "../../genre/genre.model.js";
 
 export class Genre_junctionModel {
-    static _junction = null
-
-    static async define(sequelize) {
-        Genre_junctionModel._junction = sequelize.define('GenreJunction', {
+    static _model = null
+    static _modelConfigs = {
+        modelName: 'GenresJunction',
+        model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
@@ -16,25 +16,18 @@ export class Genre_junctionModel {
             game_id: {
                 type: DataTypes.UUID,
                 references: {
-                    model: GameModel._gameModel,
+                    model: GameModel._modelConfigs.configs.tableName,
                     key: 'id'
                 }
             },
             genre_id: {
                 type: DataTypes.UUID,
                 references: {
-                    model: GenreModel._genreModel,
+                    model: GenreModel._modelConfigs.configs.tableName,
                     key: 'id'
                 }
             }
-        })
-    }
-
-    static async create(obj) {
-        const junction = await Genre_junctionModel._junction.create(obj);
-
-        await junction.save()
-
-        return junction
+        },
+        configs: undefined
     }
 }

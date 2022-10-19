@@ -1,30 +1,29 @@
 import {DataTypes} from "sequelize";
 
-export class AchievementModel {
+export class Age_ratingModel {
     static _model = null
     static _modelConfigs = {
-        modelName: 'Achievement',
+        modelName: 'AgeRating',
         model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4
             },
-            title: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            icon: {
+            rating_usa: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true
             },
-            aim: {
+            rating_rars: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true
             }
         },
         configs: {
-            tableName: 'Achievements'
-        }
+            tableName: 'AgeRatings'
+        },
+        include: []
     }
 }

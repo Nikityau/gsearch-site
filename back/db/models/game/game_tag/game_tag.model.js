@@ -1,23 +1,24 @@
 import {DataTypes} from "sequelize";
 
-
-export class VideoModel {
+export class Game_tagModel {
     static _model = null
     static _modelConfigs = {
-        modelName: 'Video',
+        modelName: 'GameTag',
         model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4
             },
-            url: {
+            tag_title: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: false,
+                unique: true
             }
         },
         configs: {
-            tableName: 'Videos'
-        }
+            tableName: 'GamesTags'
+        },
+        include: []
     }
 }

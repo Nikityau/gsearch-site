@@ -1,11 +1,10 @@
-import { DataTypes } from "sequelize";
+import {DataTypes} from "sequelize";
 
 export class PublisherModel {
-    static _pubModel = null
-
-
-    static async define(sequelize) {
-        PublisherModel._pubModel = sequelize.define('Publisher', {
+    static _model = null;
+    static _modelConfigs = {
+        modelName: 'Publisher',
+        model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
@@ -19,24 +18,10 @@ export class PublisherModel {
                 type: DataTypes.STRING,
                 allowNull: false
             }
-        }, {
+        },
+        configs: {
             tableName: 'Publishers'
-        })
-    }
-
-    static async create(obj) {
-        const pub = await PublisherModel._pubModel.create(obj)
-
-        await pub.save()
-
-        return pub;
-    }
-
-    static async belongsToMany(model, { foreignKey, asWhat, through }) {
-        PublisherModel._pubModel.belongsToMany(model, {
-            foreignKey: foreignKey,
-            as: asWhat,
-            through: through
-        })
+        },
+        include: []
     }
 }

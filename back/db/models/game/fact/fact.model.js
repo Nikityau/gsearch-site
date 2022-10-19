@@ -1,10 +1,10 @@
-import { DataTypes } from "sequelize";
+import {DataTypes} from "sequelize";
 
 export class FactModel {
-    static _factModel = null
-
-    static async defineModel(sequelize) {
-        FactModel._factModel = sequelize.define('Fact', {
+    static _model = null
+    static _modelConfigs = {
+        modelName: 'Fact',
+        model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
@@ -14,16 +14,9 @@ export class FactModel {
                 type: DataTypes.TEXT,
                 allowNull: false
             }
-        }, {
+        },
+        configs: {
             tableName: 'Facts'
-        })
-    }
-
-    static async create(factObj) {
-        const fact = await FactModel._factModel.create(factObj);
-
-        await fact.save()
-
-        return fact;
+        }
     }
 }

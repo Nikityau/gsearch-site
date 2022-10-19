@@ -1,10 +1,10 @@
 import {DataTypes} from "sequelize";
 
 export class DeveloperModel {
-    static _devModel = null
-
-    static async defineModel(sequelize) {
-        DeveloperModel._devModel = sequelize.define('Developer', {
+    static _model = null
+    static _modelConfigs = {
+        modelName: 'Developer',
+        model: {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
@@ -19,34 +19,10 @@ export class DeveloperModel {
                 type: DataTypes.STRING,
                 allowNull: false
             }
-        }, {
+        },
+        configs: {
             tableName: 'Developers'
-        })
-    }
-
-    static async belongsToMany(model, { foreignKey, asWhat, through }) {
-        DeveloperModel._devModel.belongsToMany(model, {
-            foreignKey: foreignKey,
-            as: asWhat,
-            through: through
-        })
-    }
-
-    static async create(devObj) {
-        const dev = await DeveloperModel._devModel.create(devObj)
-
-        await dev.save()
-
-        return dev
-    }
-
-    static async getAll() {
-        const all = await DeveloperModel._devModel.findAll({
-            include: [
-                'games',
-            ]
-        })
-
-        return all
+        },
+        include: []
     }
 }
