@@ -21,6 +21,8 @@ export async function connectDb() {
 
     } catch (e) {
         Logger.error(`DB error: ${e.message}`)
+
+        throw new Error('stop server')
     }
 }
 

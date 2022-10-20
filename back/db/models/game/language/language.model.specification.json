@@ -1,0 +1,7 @@
+{
+  "id": "uuid",
+  "lang": "string",
+  "lang_is_support_interface": "bool",
+  "lang_is_support_sound": "bool",
+  "lang_is_support_subs": "bool"
+}

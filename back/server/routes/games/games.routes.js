@@ -1,4 +1,5 @@
 import express from "express";
+
 import { GamesController } from "../../../controllers/games/games.controller.js"
 
 export const gamesRouter = express.Router()

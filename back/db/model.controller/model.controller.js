@@ -7,28 +7,30 @@ export class ModelController {
     }
 
     async setUp(sequelize) {
-       try {
-           const {
-               models,
-               junction_models,
-               links
-           } = this._modelsSetUp
+        try {
+            const {
+                models,
+                junction_models,
+                links
+            } = this._modelsSetUp
 
-           await this.setUpModelsList(
-               models,
-               sequelize
-           )
-           await this.setUpModelsList(
-               junction_models,
-               sequelize
-           )
+            await this.setUpModelsList(
+                models,
+                sequelize
+            )
+            await this.setUpModelsList(
+                junction_models,
+                sequelize
+            )
 
-           await this.setUpOneToMany(links.oneToMany)
+            await this.setUpOneToMany(links.oneToMany)
 
-           await this.setUpManyToMany(links.manyToMany)
-       } catch (e) {
-           console.log('die on set up')
-       }
+            await this.setUpManyToMany(links.manyToMany)
+
+            await this.setUpBelongsTo(links.belongsTo)
+        } catch (e) {
+            console.log('die on set up')
+        }
     }
 
     async setUpModelsList(modelList, sequelize) {
@@ -42,7 +44,7 @@ export class ModelController {
     }
 
     async setUpManyToMany(modelList) {
-        for(let conf of modelList) {
+        for (let conf of modelList) {
             const {
                 model,
                 foreignKey,
@@ -50,7 +52,7 @@ export class ModelController {
                 belongsToMany
             } = conf
 
-            for(let linkModel of belongsToMany) {
+            for (let linkModel of belongsToMany) {
                 await this.belongsToMany(
                     model,
                     linkModel.model,
@@ -73,19 +75,18 @@ export class ModelController {
             }
         }
     }
-    async belongsToMany(ModelClass,LinkModelClass, {foreignKey, asWhat, through}) {
+    async belongsToMany(ModelClass, LinkModelClass, {foreignKey, asWhat, through}) {
         ModelClass._model.belongsToMany(LinkModelClass._model, {
             foreignKey,
             as: asWhat,
             through
         })
 
-        ModelClass._modelConfigs.include.push({
-            model: LinkModelClass._model,
-            attributes: {
-              exclude: ['createdAt', 'updatedAt']
-            },
+        await this.modelIncludePush(ModelClass, LinkModelClass, {
             as: asWhat,
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
             through
         })
     }
@@ -111,18 +112,58 @@ export class ModelController {
             as: asWhat,
         })
 
-        ModelClass._modelConfigs.include.push({
-            model: LinkModelClass._model,
+        await this.modelIncludePush(ModelClass, LinkModelClass, {
             as: asWhat,
             attributes: {
                 exclude: ['createdAt', 'updatedAt']
-            }
+            },
         })
     }
 
+    async setUpBelongsTo(modelList) {
+        for (let conf of modelList) {
+            const {
+                model,
+                foreignKey,
+                belongsTo
+            } = conf
+
+            for (let linkModel of belongsTo) {
+                await this.belongsTo(
+                    model,
+                    linkModel.model, {
+                        foreignKey,
+                        asWhat: linkModel.asWhat
+                    }
+                )
+            }
+        }
+    }
+    async belongsTo(ModelClass, LinkModelClass, {foreignKey, asWhat}) {
+        ModelClass._model.belongsTo(LinkModelClass._model, {
+            foreignKey,
+            as: asWhat
+        })
+
+        await this.modelIncludePush(ModelClass, LinkModelClass, {
+            as: asWhat,
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
+        })
+    }
 
     async defineModel(ModelClass, {modelName, model, configs}, sequelize) {
         ModelClass._model = await sequelize.define(modelName, model, configs)
+    }
+
+    async modelIncludePush(ModelClass, LinkModelClass, { as, attributes, through = undefined }) {
+       ModelClass._modelConfigs.include.push({
+           model: LinkModelClass._model,
+           as,
+           attributes,
+           through
+       })
     }
 
     static async createModel(ModelClass, modelData) {

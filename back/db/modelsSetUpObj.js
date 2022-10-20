@@ -10,6 +10,8 @@ import {Game_tagModel} from "./models/game/game_tag/game_tag.model.js";
 import {Info_tagModel} from "./models/game/info_tag/info_tag.model.js";
 import {RatingModel} from "./models/game/rating/rating.model.js";
 import {Age_ratingModel} from "./models/game/age_rating/age_rating.model.js";
+import {Game_seriesModel} from "./models/game/game_series/game_series.model.js";
+import {LanguageModel} from "./models/game/language/language.model.js";
 
 import {Genre_junctionModel} from "./models/game/junction_model/genre_junction/genre_junction.model.js";
 import {Games_publishersModel} from "./models/game/junction_model/games_publishers/games_publishers.model.js";
@@ -21,6 +23,7 @@ import {Info_tags_junctionModel} from "./models/game/junction_model/info_tags_ju
 import {
     Age_ratings_junctionModel
 } from "./models/game/junction_model/age_rating_junction/age_ratings_junction.model.js";
+import {Language_junctionModel} from "./models/game/junction_model/language_junction/language_junction.model.js";
 
 export const modelsSetUpObj = {
     models: [
@@ -35,7 +38,9 @@ export const modelsSetUpObj = {
         Game_tagModel,
         Info_tagModel,
         RatingModel,
-        Age_ratingModel
+        Age_ratingModel,
+        Game_seriesModel,
+        LanguageModel
     ],
     junction_models: [
         Genre_junctionModel,
@@ -43,7 +48,8 @@ export const modelsSetUpObj = {
         Games_developersModel,
         Games_tags_junctionModel,
         Info_tags_junctionModel,
-        Age_ratings_junctionModel
+        Age_ratings_junctionModel,
+        Language_junctionModel
     ],
     links: {
         oneToMany: [
@@ -70,6 +76,16 @@ export const modelsSetUpObj = {
                     {
                         model: RatingModel,
                         asWhat: 'ratings'
+                    }
+                ]
+            },
+            {
+                model: Game_seriesModel,
+                foreignKey: 'game_series_id',
+                hasMany: [
+                    {
+                        model: GameModel,
+                        asWhat: 'games'
                     }
                 ]
             }
@@ -115,6 +131,24 @@ export const modelsSetUpObj = {
                         asWhat: 'age_ratings',
                         foreignKey: 'age_rating_id',
                         through: Age_ratings_junctionModel._modelConfigs.modelName
+                    },
+                    {
+                        model: LanguageModel,
+                        asWhat: 'languages_support',
+                        foreignKey: 'lang_id',
+                        through: Language_junctionModel._modelConfigs.modelName
+                    }
+                ]
+            }
+        ],
+        belongsTo: [
+            {
+                model: GameModel,
+                foreignKey: 'game_id',
+                belongsTo: [
+                    {
+                        model: Game_seriesModel,
+                        asWhat: 'game_series'
                     }
                 ]
             }
