@@ -7,6 +7,8 @@ export class Game_seriesModel {
         model: {
             id: {
                 type: DataTypes.UUID,
+                primaryKey: true,
+                defaultValue: DataTypes.UUIDV4
             },
             game_series: {
                 type: DataTypes.STRING,

@@ -1,0 +1,6 @@
+{
+  "id": "uuid",
+  "award_title": "string",
+  "award_icon": "url",
+  "award_dare": "date"
+}

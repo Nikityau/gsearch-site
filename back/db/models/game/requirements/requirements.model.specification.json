@@ -1,0 +1,11 @@
+{
+  "id": "uuid",
+  "spec_requirements": "string",
+  "oc": "string",
+  "processor": "string",
+  "ram": "string",
+  "gpu": "string",
+  "network": "string",
+  "hard_size": "string",
+  "addition": "string"
+}

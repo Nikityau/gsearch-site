@@ -13,11 +13,11 @@ export class GameModel {
             slug: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true
             },
             title: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true
             },
             subtitle: {
                 type: DataTypes.STRING,
@@ -29,10 +29,6 @@ export class GameModel {
                 allowNull: false
             },
             preview_image: {
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            game_series: {
                 type: DataTypes.STRING,
                 allowNull: true,
                 defaultValue: null
@@ -55,7 +51,7 @@ export class GameModel {
                 type: DataTypes.UUID,
                 allowNull: true,
                 defaultValue: null,
-            }
+            },
         },
         configs: {
             tableName: 'Games'

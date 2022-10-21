@@ -12,6 +12,9 @@ import {RatingModel} from "./models/game/rating/rating.model.js";
 import {Age_ratingModel} from "./models/game/age_rating/age_rating.model.js";
 import {Game_seriesModel} from "./models/game/game_series/game_series.model.js";
 import {LanguageModel} from "./models/game/language/language.model.js";
+import {AwardsModel} from "./models/game/awards/awards.model.js";
+import {RequirementsModel} from "./models/game/requirements/requirements.model.js";
+import {System_requirementsModel} from "./models/game/system_requirements/system_requirements.model.js";
 
 import {Genre_junctionModel} from "./models/game/junction_model/genre_junction/genre_junction.model.js";
 import {Games_publishersModel} from "./models/game/junction_model/games_publishers/games_publishers.model.js";
@@ -40,7 +43,10 @@ export const modelsSetUpObj = {
         RatingModel,
         Age_ratingModel,
         Game_seriesModel,
-        LanguageModel
+        LanguageModel,
+        AwardsModel,
+        RequirementsModel,
+        System_requirementsModel
     ],
     junction_models: [
         Genre_junctionModel,
@@ -76,7 +82,11 @@ export const modelsSetUpObj = {
                     {
                         model: RatingModel,
                         asWhat: 'ratings'
-                    }
+                    },
+                    {
+                        model: AwardsModel,
+                        asWhat: 'awards'
+                    },
                 ]
             },
             {
@@ -143,15 +153,44 @@ export const modelsSetUpObj = {
         ],
         belongsTo: [
             {
-                model: GameModel,
-                foreignKey: 'game_id',
+                model: System_requirementsModel,
+                foreignKey: 'system_requirements_id',
                 belongsTo: [
                     {
-                        model: Game_seriesModel,
-                        asWhat: 'game_series'
+                        model: RequirementsModel,
+                        asWhat: 'requirement'
                     }
                 ]
             }
+        ],
+        hasOne: [
+            {
+                model: GameModel,
+                foreignKey: 'game_id',
+                hasOne: [
+                    {
+                        model: System_requirementsModel,
+                        asWhat: 'system_requirements'
+                    }
+                ]
+            },
         ]
     }
 }
+
+    /*[
+    {
+        model: GameModel,
+        foreignKey: 'game_id',
+        belongsTo: [
+            {
+                model: Game_seriesModel,
+                asWhat: 'game_series'
+            },
+            {
+                model: System_requirementsModel,
+                asWhat: 'system_requirements'
+            }
+        ]
+    }
+    ]*/
