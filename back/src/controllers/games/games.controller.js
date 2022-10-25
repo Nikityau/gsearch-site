@@ -1,9 +1,9 @@
 import {GameModel} from "../../db/models/game/game.model.js";
-import {ModelController} from "../../db/model.controller/model.controller.js";
+import { ModelManipulationController } from "../../db/model.controller/modelManipulation.controller.js";
 
 export class GamesController {
     async getAllGames(req, res) {
-        const allGames = await ModelController.getAll(
+        const allGames = await ModelManipulationController.getAll(
             GameModel,
             {
                 include: GameModel._modelConfigs.include

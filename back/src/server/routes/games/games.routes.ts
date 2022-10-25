@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Response, Request} from "express";
 
 import { GamesController } from "../../../controllers/games/games.controller.js"
 
@@ -11,9 +11,9 @@ const currentGamePath = `${defPath}/:id`
 const byGenreGamesPath = `${defPath}/genre/:genre`
 
 gamesRouter.get(defPath, gController.getAllGames)
-gamesRouter.get(currentGamePath, (req, res) => {
+gamesRouter.get(currentGamePath, (req: Request, res:Response) => {
     res.send('current game')
 })
-gamesRouter.get(byGenreGamesPath, (req, res) => {
+gamesRouter.get(byGenreGamesPath, (req: Request, res:Response) => {
     res.send('by genre')
 })

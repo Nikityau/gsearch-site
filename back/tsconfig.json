@@ -1,0 +1,47 @@
+{
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "src/**/*.js",
+    "src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/",
+
+    "esModuleInterop": true,
+
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": false,
+
+    "noImplicitAny": true,
+    "noImplicitOverride": false,
+    "noImplicitThis": true,
+
+    "noPropertyAccessFromIndexSignature": true,
+    "noUnusedParameters": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": false,
+
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "skipDefaultLibCheck": true,
+
+    "module": "esnext",
+    "target": "ES2022",
+    "resolveJsonModule": true,
+    "allowJs": true,
+
+    "declaration": false
+  }
+}
