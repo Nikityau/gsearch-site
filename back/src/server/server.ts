@@ -3,11 +3,11 @@ import cors from 'cors'
 
 import { Logger } from '../logger/logger.js'
 
-import { gamesRouter } from './routes/games/games.routes'
+import { gamesRouter } from './routes/games/games.routes.js'
 
 import { connectDb } from '../db/db.js'
 
-import { preGetGoodResponse } from './middlewares/preGetGoodResponse'
+import { preGetGoodResponse } from './middlewares/preGetGoodResponse.js'
 
 const PORT = 8000
 
@@ -21,7 +21,7 @@ app.use('/api', gamesRouter)
 
 async function startServer() {
     try {
-        await connectDb()
+        //await connectDb()
         app.listen(PORT, 'localhost', () => Logger.serverUp(PORT))
     } catch (e: unknown ) {
         const exception = e as Error

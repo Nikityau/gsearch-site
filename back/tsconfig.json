@@ -7,11 +7,16 @@
     "src/**/*.js",
     "src/**/*.ts"
   ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ES6",
+      "moduleResolution": "NodeNext"
+    }
+  },
   "compilerOptions": {
     "baseUrl": ".",
+    "rootDir": "./src/",
     "outDir": "./dist/",
-
-    "esModuleInterop": true,
 
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -37,11 +42,12 @@
     "strictPropertyInitialization": true,
     "skipDefaultLibCheck": true,
 
-    "module": "esnext",
-    "target": "ES2022",
+    "module": "ES6",
+    "target": "ES6",
     "resolveJsonModule": true,
-    "allowJs": true,
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "allowJs": true
 
-    "declaration": false
   }
 }

@@ -1,3 +1,1 @@
-import './src/server/server'
-
-// gsearch-root
+import "./server/server.js"
