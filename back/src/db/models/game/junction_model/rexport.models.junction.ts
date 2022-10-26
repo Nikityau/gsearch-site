@@ -1,0 +1,7 @@
+export * from './age_rating_junction/age_ratings_junction.model.js'
+export * from './game_tag_junction/games_tags_junction.model.js'
+export * from './games_developers/games_developers.model.js'
+export * from './games_publishers/games_publishers.model.js'
+export * from './genre_junction/genre_junction.model.js'
+export * from './language_junction/language_junction.model.js'
+export * from './info_tags_junction/info_tags_junction.model.js'
